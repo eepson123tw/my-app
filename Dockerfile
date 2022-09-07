@@ -4,12 +4,13 @@ FROM node:18.8-alpine3.16
 
 WORKDIR /app
 
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --no-cache --production
+COPY package.json .
+
+RUN yarn install --frozen-lockfile --production && yarn cache clean
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 80
 
 CMD [ "yarn", "start" ]
 
