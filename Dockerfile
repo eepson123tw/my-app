@@ -6,12 +6,7 @@ WORKDIR /app
 
 COPY package.json .
 
-RUN yum update && yum install -y curl apt-transport-https && \
-  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-  yum update && yum install -y yarn
-
-RUN npm install -g create-react-app
+RUN --mount=type=cache,sharing=locked,target=/usr/local/share/.cache/yarn yarn install
 
 COPY . .
 
