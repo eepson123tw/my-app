@@ -1,16 +1,16 @@
 
 # build stage
-FROM node:18.8-alpine3.16
+FROM node:18.8-alpine3.16 as build
 
-WORKDIR /app
+WORKDIR /usr/src/docker-react-sample
 
-COPY package.json .
+COPY package*.json ./
 
 RUN yarn install --frozen-lockfile --production && yarn cache clean
 
 COPY . .
 
-EXPOSE 80
+EXPOSE 3000
 
 CMD [ "yarn", "start" ]
 
