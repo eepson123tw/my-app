@@ -4,9 +4,8 @@ FROM node:18.8-alpine3.16
 
 WORKDIR /app
 
-COPY package.json .
-
-RUN --mount=type=cache,sharing=locked,target=/usr/local/share/.cache/yarn yarn install
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile --no-cache --production
 
 COPY . .
 
