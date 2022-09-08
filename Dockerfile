@@ -2,7 +2,7 @@
 # build stage
 FROM node:18.8-alpine3.16 AS builder
 
-WORKDIR /www
+WORKDIR /app
 
 COPY . .
 
@@ -12,8 +12,7 @@ EXPOSE 3000
 
 CMD [ "npm", "run", "start" ]
 
-# production stage
-# FROM nginx:stable-alpine as production-stage
-# COPY --from=build-stage /app/dist /usr/share/nginx/html
-# EXPOSE 80
-# CMD ["nginx", "-g", "daemon off;"]
+FROM nginx
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf 
+
+COPY --from=build /app/build /usr/share/nginx/html 
