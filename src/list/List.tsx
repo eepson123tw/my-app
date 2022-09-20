@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 interface User {
   userId: String
   username: String
@@ -13,6 +13,11 @@ function List({ list, children }: { list: User[]; children?: JSX.Element }) {
   const [x, setList] = useState(list)
   const dragItem: React.MutableRefObject<any> = useRef(null)
   const dragOverItem: React.MutableRefObject<any> = useRef(null)
+  let [count, setCount] = useState(0)
+
+  useEffect(() => {
+    document.title = `You clicked ${count} times`
+  })
 
   const dragStart = (e: React.DragEvent, position: number) => {
     // This will get executed only for nullRef and not for the other two refs
@@ -38,6 +43,8 @@ function List({ list, children }: { list: User[]; children?: JSX.Element }) {
     copyListItems.splice(dragOverItem.current, 0, dragItemContent)
     dragItem.current = null
     dragOverItem.current = null
+
+    setCount(++count)
     setList(copyListItems)
   }
   return (
