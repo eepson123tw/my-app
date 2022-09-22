@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import PeopleList from './routes/peopleList'
+import Hooks from './routes/hooks'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
@@ -14,6 +15,7 @@ root.render(
       <Routes>
         <Route path='/' element={<App />}>
           <Route path='PeopleList' element={<PeopleList />} />
+          <Route path='Hooks' element={<Hooks />} />
         </Route>
       </Routes>
     </BrowserRouter>

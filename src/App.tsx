@@ -4,13 +4,15 @@ function App() {
   return (
     <div>
       <Link
-        className=' text-base text-red-400'
+        className=' text-base text-red-400 mr-2'
         to={`/peopleList`}
         key='peopleList'
       >
         Go to peopleList
       </Link>
-      123
+      <Link className=' text-base text-red-400' to={`/hooks`} key='hooks'>
+        hooks
+      </Link>
       <Outlet />
     </div>
   )
