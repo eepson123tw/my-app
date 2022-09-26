@@ -1,6 +1,7 @@
 # Getting Started with React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Reference1](https://react-typescript-cheatsheet.netlify.app/)
 
 
 ## Configure  about the Hooks api
