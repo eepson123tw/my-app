@@ -17,3 +17,5 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
                   use empty ary to call once , or pass the watching state which you want to focus at
 
 5.**useReducer**: like useState but we can set the  situation  which we want to change multiple states
+
+6.**useLayoutEffect**:before the useEffect, before print the page, can use at some ui change UseCase

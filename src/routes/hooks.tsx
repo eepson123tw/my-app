@@ -1,7 +1,15 @@
-import { useState, useRef, useReducer, useEffect } from 'react'
+import { useState, useRef, useReducer, useEffect, useLayoutEffect } from 'react'
 import axios from 'axios'
 
 export default function Hooks() {
+  //before the useEffect, before print the page
+  useLayoutEffect(() => {
+    console.log('useLayoutEffect')
+  }, [])
+  // only called after render page => vary fast and user can not see
+  useEffect(() => {
+    console.log('useEffect')
+  }, [])
   // const [inputValue, setInputValue] = useState('app')
 
   // const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,30 +30,30 @@ export default function Hooks() {
   //   }
   // }
 
-  const [fakeData, setFakeData] = useState<[{ name: string; id: number }]>([
-    { name: '', id: 0 }
-  ])
+  // const [fakeData, setFakeData] = useState<[{ name: string; id: number }]>([
+  //   { name: '', id: 0 }
+  // ])
 
   //useRef like an domQuerySelector help developer use dom element easily
-  const inputRef = useRef<HTMLInputElement>(null)
+  // const inputRef = useRef<HTMLInputElement>(null)
 
-  const onclickBtn = () => {
-    if (null !== inputRef.current) {
-      inputRef.current.focus()
-    }
-  }
+  // const onclickBtn = () => {
+  //   if (null !== inputRef.current) {
+  //     inputRef.current.focus()
+  //   }
+  // }
 
   // const [state, dispatch] = useReducer(reducer, { count: 0, showText: true })
 
-  useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/comments').then((res) => {
-      setFakeData(res.data)
-    })
-  }, [])
+  // useEffect(() => {
+  //   axios.get('https://jsonplaceholder.typicode.com/comments').then((res) => {
+  //     setFakeData(res.data)
+  //   })
+  // }, [])
 
   return (
     <div className='App mt-5 mx-auto  container   bg-sky-500 '>
-      {fakeData &&
+      {/* {fakeData &&
         fakeData.map(
           (d, i) =>
             i <= 10 && (
@@ -67,7 +75,7 @@ export default function Hooks() {
         <button onClick={onclickBtn} className=' border border-red-100'>
           add foucus
         </button>
-      </div>
+      </div> */}
 
       {/* <input
         type='text'
