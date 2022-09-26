@@ -1,4 +1,4 @@
-import { useState, useReducer, useEffect } from 'react'
+import { useState, useRef, useReducer, useEffect } from 'react'
 import axios from 'axios'
 
 export default function Hooks() {
@@ -26,27 +26,49 @@ export default function Hooks() {
     { name: '', id: 0 }
   ])
 
+  //useRef like an domQuerySelector help developer use dom element easily
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const onclickBtn = () => {
+    if (null !== inputRef.current) {
+      inputRef.current.focus()
+    }
+  }
+
   // const [state, dispatch] = useReducer(reducer, { count: 0, showText: true })
 
   useEffect(() => {
-    // when render execute useEffect fn will run,include changing the state ,because changing state will rerender the Page(*)
-    // when page render useEffect will render once and change the state will can once (render twice)
-    // use empty ary to call once , or pass the watching state which you want to focus at
     axios.get('https://jsonplaceholder.typicode.com/comments').then((res) => {
       setFakeData(res.data)
-      // console.log(123)
     })
   }, [])
 
   return (
     <div className='App mt-5 mx-auto  container   bg-sky-500 '>
       {fakeData &&
-        fakeData.map((d) => (
-          <h2 key={d.id}>
-            {d.id} `&gt;`
-            {d.name}
-          </h2>
-        ))}
+        fakeData.map(
+          (d, i) =>
+            i <= 10 && (
+              <h2 key={d.id}>
+                {d.id} `&gt;`
+                {d.name}
+              </h2>
+            )
+        )}
+
+      <div className='flex'>
+        <input
+          type='text'
+          name='app'
+          placeholder='123'
+          className='border border-red-300'
+          ref={inputRef}
+        />
+        <button onClick={onclickBtn} className=' border border-red-100'>
+          add foucus
+        </button>
+      </div>
+
       {/* <input
         type='text'
         placeholder='insert'
