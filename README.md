@@ -19,3 +19,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 5.**useReducer**: like useState but we can set the  situation  which we want to change multiple states
 
 6.**useLayoutEffect**:before the useEffect, before print the page, can use at some ui change UseCase
+
+7.**useImperativeHandle**:can call some function outside and made component more useable. like vue ref and pass props to do someThing.
+
+8.**useContext**:To create State which can pass multiple component and like an global controller.(createContext<-need to pass value(which we want to control),useContext)

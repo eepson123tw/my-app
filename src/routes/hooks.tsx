@@ -1,6 +1,19 @@
-import { useState, useRef, useReducer, useEffect, useLayoutEffect } from 'react'
+import {
+  useState,
+  useRef,
+  useReducer,
+  useEffect,
+  useLayoutEffect,
+  createContext
+} from 'react'
 import axios from 'axios'
 
+import User from '../components/User'
+import Login from '../components/Login'
+export const AppContext = createContext<{
+  userName: string
+  setUserName: Function
+} | null>(null)
 export default function Hooks() {
   //before the useEffect, before print the page
   useLayoutEffect(() => {
@@ -51,8 +64,15 @@ export default function Hooks() {
   //   })
   // }, [])
 
+  const [userName, setUserName] = useState('')
+
   return (
     <div className='App mt-5 mx-auto  container   bg-sky-500 '>
+      <AppContext.Provider value={{ userName, setUserName }}>
+        <User></User>
+        <Login></Login>
+      </AppContext.Provider>
+
       {/* {fakeData &&
         fakeData.map(
           (d, i) =>
