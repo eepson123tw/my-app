@@ -15,9 +15,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
                   when page render useEffect will render once and change the state will can once (render twice)
                   use empty ary to call once , or pass the watching state which you want to focus at.
                   
-                  must take care of the non-primitive type. => the non-primitive state change will evoke the useEffect.
+                  1.must take care of the non-primitive type. => the non-primitive state change will evoke the useEffect.
+                  2.can set the clean up fn to stop the useEffect.
                   
-
 4.**useReducer**: like useState but we can set the  situation  which we want to change multiple states
 
 5.**useLayoutEffect**:before the useEffect, before print the page, can use at some ui change UseCase
