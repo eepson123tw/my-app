@@ -16,6 +16,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 4.**useEffect**:  when render execute useEffect fn will run,include changing the state ,because changing state will rerender the Pag(*)。
                   when page render useEffect will render once and change the state will can once (render twice)
                   use empty ary to call once , or pass the watching state which you want to focus at
+                  
+                  must take care of the **non-primitive type**. => the non-primitive state change will evoke the useEffect.
+                  
 
 5.**useReducer**: like useState but we can set the  situation  which we want to change multiple states
 
