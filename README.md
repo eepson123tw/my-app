@@ -25,3 +25,5 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 6.**useImperativeHandle**:can call some function outside and made component more useable. like vue ref and pass props to do someThing.
 
 7.**useContext**:To create State which can pass multiple component and like an global controller.(createContext<-need to pass value(which we want to control),useContext)
+
+8.**usememo**:
