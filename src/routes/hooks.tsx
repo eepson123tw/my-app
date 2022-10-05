@@ -1,4 +1,4 @@
-import {
+import React, {
   useState,
   useRef,
   useReducer,
@@ -33,25 +33,37 @@ export default function Hooks() {
   //   setInputValue(e.target.value)
   // }
 
-  // const reducer = (
-  //   state: { count: number; showText: boolean },
-  //   action: { type: string }
-  // ): any => {
-  //   switch (action.type) {
-  //     case 'INCREMENT':
-  //       return { count: state.count + 1, showText: state.showText }
-  //     case 'toggleShow':
-  //       return { count: state.count, showText: !state.showText }
-  //     default:
-  //       return state
-  //   }
-  // }
+  const reducer = (
+    state: { count: number; showText: boolean },
+    action: { type: string; payload: any }
+  ): any => {
+    switch (action.type) {
+      case 'INCREMENT':
+        return {
+          ...state,
+          count: state.count + 1,
+          showText: action.payload.showText
+        }
+      case 'toggleShow':
+        return { count: state.count, showText: !state.showText }
+      default:
+        return state
+    }
+  }
 
-  const [fakeData, setFakeData] = useState<[{ name: string; id: number }]>([
-    { name: '', id: 0 }
-  ])
+  const [state, dispatch] = useReducer(reducer, { count: 0, showText: true })
 
-  const [toggle, setToggle] = useState(false)
+  const changeFn = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let x: String = e.target.value
+
+    dispatch({ type: 'INCREMENT', payload: { showText: x } })
+  }
+
+  // const [fakeData, setFakeData] = useState<[{ name: string; id: number }]>([
+  //   { name: '', id: 0 }
+  // ])
+
+  // const [toggle, setToggle] = useState(false)
 
   //useRef like an domQuerySelector help developer use dom element easily
   // const inputRef = useRef<HTMLInputElement>(null)
@@ -62,25 +74,29 @@ export default function Hooks() {
   //   }
   // }
 
-  // const [state, dispatch] = useReducer(reducer, { count: 0, showText: true })
+  // useEffect(() => {
+  //   axios.get('https://jsonplaceholder.typicode.com/comments').then((res) => {
+  //     setFakeData(res.data)
+  //   })
+  // }, [])
 
-  useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/comments').then((res) => {
-      setFakeData(res.data)
-    })
-  }, [])
+  // const counter = (ary: [{ name: string; id: Number }]) => {
+  //   console.log(123)
+  //   return '123'
+  // }
 
-  const counter = (ary: [{ name: string; id: Number }]) => {
-    console.log(123)
-    return '123'
-  }
+  // const memoCounter = useMemo(() => counter(fakeData), [fakeData])
 
-  const memoCounter = useMemo(() => counter(fakeData), [fakeData])
-
-  const [userName, setUserName] = useState('')
+  // const [userName, setUserName] = useState('')
 
   return (
     <div className='App mt-5 mx-auto  container   bg-sky-500 '>
+      <input
+        type='text'
+        className='border  border-red-300'
+        onChange={changeFn}
+      />
+      <p>{state.showText}</p>
       {/* <AppContext.Provider value={{ userName, setUserName }}>
         <User></User>
         <Login></Login>
@@ -97,15 +113,15 @@ export default function Hooks() {
             )
         )} */}
 
-      <p>{memoCounter}</p>
+      {/* <p>{memoCounter}</p> */}
 
-      {toggle && <h2>toggle</h2>}
-      <button
+      {/* {toggle && <h2>toggle</h2>} */}
+      {/* <button
         className='border border-red-300 text-black'
         onClick={() => setToggle(!toggle)}
       >
         add click
-      </button>
+      </button> */}
 
       {/* <div className='flex'>
         <input
