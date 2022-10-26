@@ -9,6 +9,8 @@ export default function TodoList() {
   const [todo, setTodo] = useState<todo[]>([])
   const todoRef = useRef<HTMLInputElement | null>(null)
 
+  let [id, setId] = useState(0)
+
   // const inputHandler = (e: React.FormEvent<EventTarget>): void => {
   //   let ans = e.target as HTMLInputElement
   //   setTodo((x) => [...x, { name: ans.value }])
@@ -21,6 +23,10 @@ export default function TodoList() {
         val.current && (val.current.value = '')
       }, 1)
     }
+  }
+
+  const deleteTodo = (x: todo) => {
+    setTodo((c) => c.filter((d, i) => d.name !== x.name))
   }
 
   useEffect(() => {
@@ -41,7 +47,19 @@ export default function TodoList() {
           Click
         </button>
       </div>
-      {todo.length && todo.map((x) => `<p>${x.name}</p>`)}
+      {todo.length &&
+        todo.map((x) => (
+          <div key={x.name}>
+            {x.name}{' '}
+            <button
+              onClick={() => deleteTodo(x)}
+              className='outline outline-1 outline-yellow-500'
+            >
+              delete
+            </button>{' '}
+          </div>
+        ))}
+      <br />
     </div>
   )
 }
